@@ -1,0 +1,27 @@
+{
+  "name": "01-24-second_attempt",
+  "version": "1.0.0",
+  "main": "serverController.mjs",
+  "type": "module",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "fs": "^0.0.1-security",
+    "nodemon": "^3.0.3",
+    "sharp": "^0.33.2"
+  },
+  "scripts": {
+    "start": "node serverController.mjs",
+    "styles": "sass styles.scss public/styles.css",
+    "deploy": "gcloud app deploy"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "prettier": "3.2.5",
+    "webpack": "^5.90.1",
+    "webpack-cli": "^5.1.4"
+  }
+}

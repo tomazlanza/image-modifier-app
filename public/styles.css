@@ -1,0 +1,155 @@
+:root {
+  box-sizing: border-box;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 2em;
+}
+
+#initial-page-wrapper {
+  display: initial;
+}
+
+#images-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#images-section p {
+  margin: 0;
+  margin-bottom: 0.75rem;
+  font-style: italic;
+  font-size: 0.8;
+}
+#images-section div {
+  display: flex;
+}
+#images-section div div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 1rem;
+}
+#images-section div div h3 {
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+#reset {
+  margin-bottom: 0.5rem;
+  border-radius: 15%;
+  padding: 1.5% 3.2%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.7rem;
+  background-color: #B097C9;
+}
+#reset:hover {
+  cursor: pointer;
+}
+#reset:hover {
+  background-color: #d6c9e3;
+}
+
+#submit {
+  margin-bottom: 0.5rem;
+  border-radius: 15%;
+  padding: 1.5% 3.2%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.7rem;
+  background-color: #B0C997;
+}
+#submit:hover {
+  cursor: pointer;
+}
+#submit:hover {
+  background-color: #d6e3c9;
+}
+
+body {
+  background-color: #c99797;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+#sponsor-heading {
+  animation: 9s sponsor-motion infinite linear;
+  font-size: 1.1rem;
+}
+
+@keyframes sponsor-motion {
+  0% {
+    transform: translateX(-20%);
+    color: #666666;
+  }
+  17% {
+    color: #1a1a1a;
+  }
+  33% {
+    color: #666666;
+  }
+  50% {
+    color: #1a1a1a;
+  }
+  67% {
+    color: #666666;
+  }
+  100% {
+    transform: translateX(110%);
+    color: #1a1a1a;
+  }
+}
+img {
+  width: 10rem;
+  height: 13rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 1.7rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #B87575;
+  font-size: 1rem;
+  border: solid black 0.01rem;
+  padding: 1rem 0;
+}
+
+label {
+  font-size: 0, 8rem;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-top: 5rem;
+  border-top: solid 0.1rem black;
+}
+
+input {
+  margin: 1rem 0;
+  font-size: 0.7rem;
+}
+input:valid {
+  background-color: greenyellow;
+  border: 2px solid black;
+}
+input:invalid {
+  background-color: red;
+  border: 2px dashed red;
+}
+input:hover {
+  cursor: pointer;
+}
+
+/*# sourceMappingURL=styles.css.map */

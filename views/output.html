@@ -1,0 +1,21 @@
+  <section id="images-section">
+    <h2>There you go!</h2>
+    <p>Click on an image to open it in a new tab</p>
+    <div>    
+      <div>
+        <h3>Original</h3>
+        <a href="data:image/jpeg;base64,<%= originalImage %>" target="_blank">
+          <img alt="original-image" src="data:image/jpeg;base64,<%= originalImage %>">
+        </a>
+      </div>
+      
+      <div>
+        <h3>Modified</h3>
+        <a href="data:image/jpeg;base64,<%= modifiedImage %>" target="_blank">
+          <img alt="scrambled-image" src="data:image/jpeg;base64,<%= modifiedImage %>">
+        </a>
+      </div>
+    </div>
+
+  </section>
+  <!-- <output></output> -->

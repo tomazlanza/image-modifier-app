@@ -1,0 +1,167 @@
+$bg-color: #c99797;
+$details-color: #B87575;
+$reset-button-color: #B097C9;
+$submit-button-color: #B0C997;
+
+:root {
+  box-sizing: border-box;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 2em;
+}
+
+#initial-page-wrapper {
+  display: initial;
+}
+
+#images-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    margin: 0;
+    margin-bottom: 0.75rem;
+    font-style: italic;
+    font-size: 0.8;
+  }
+
+  div {
+    display: flex;
+    
+    div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      margin: 0 1rem;
+
+      h3 {
+        font-size: 1rem;
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+
+@mixin buttons-common-styling {
+  margin-bottom: 0.5rem;
+  border-radius: 15%;
+
+  padding: 1.5% 3.2%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.7rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+
+#reset {
+  @include buttons-common-styling;
+  background-color: $reset-button-color;
+
+  &:hover {
+    background-color: lighten($reset-button-color, 15%);
+  }
+}
+
+#submit {
+  @include buttons-common-styling;
+  background-color: $submit-button-color;
+  
+  &:hover {
+    background-color: lighten($submit-button-color, 15%);
+  }
+}
+
+body {
+  background-color: $bg-color;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+#sponsor-heading {
+  animation: 9s sponsor-motion infinite linear;
+  font-size: 1.1rem;
+}
+
+@keyframes sponsor-motion {
+  0% {
+    transform: translateX(-30%);
+    color: lighten(black, 40%);
+  }
+  17% {
+    color: lighten(black, 10%);
+  }
+  33% {
+    color: lighten(black, 40%);
+  }
+  50% {
+    color: lighten(black, 10%);
+  }
+  67% {
+    color: lighten(black, 40%);
+  }
+  100% {
+    transform: translateX(110%);
+    color: lighten(black, 10%);
+  }
+}
+
+img {
+  width: 10rem;
+  height: 13rem;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 1.7rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $details-color;
+
+  font-size: 1rem;
+  border: solid black 0.01rem;
+  padding: 1rem 0;
+
+}
+
+label {
+  font-size: 0,8rem;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  margin-top: 5rem;
+  border-top: solid 0.1rem black;
+}
+
+input {
+  margin: 1rem 0;
+  font-size: 0.7rem;
+  
+  &:valid {
+    background-color: greenyellow;
+    border: 2px solid black;
+  }
+  &:invalid {
+    background-color: red;
+    border: 2px dashed red;
+  }
+  &:hover {
+    cursor: pointer;
+  }
+}
