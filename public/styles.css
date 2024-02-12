@@ -8,31 +8,67 @@
   display: initial;
 }
 
+@keyframes imagesSectionEntry {
+  0% {
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
 #images-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: imagesSectionEntry 1s linear;
+}
+#images-section h2 {
+  margin-top: 0;
 }
 #images-section p {
   margin: 0;
   margin-bottom: 0.75rem;
   font-style: italic;
-  font-size: 0.8;
+  font-size: 0.65;
 }
-#images-section div {
+
+#images-wrapper {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
-#images-section div div {
+#images-wrapper div {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin: 0 1rem;
 }
-#images-section div div h3 {
+#images-wrapper div h3 {
   font-size: 1rem;
   margin-bottom: 0;
+}
+
+#link-to-initial-page {
+  margin-bottom: 0.5rem;
+  border-radius: 15%;
+  padding: 1.5% 3.2%;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.7rem;
+  color: black;
+  padding: 0.5% 1%;
+  background-color: #B87575;
+  border: solid black 0.05rem;
+}
+#link-to-initial-page:hover {
+  cursor: pointer;
+}
+#link-to-initial-page:hover {
+  background-color: #e3c9c9;
 }
 
 #reset {
@@ -83,7 +119,7 @@ body {
 
 @keyframes sponsor-motion {
   0% {
-    transform: translateX(-20%);
+    transform: translateX(-30%);
     color: #666666;
   }
   17% {
@@ -142,7 +178,7 @@ input {
 }
 input:valid {
   background-color: greenyellow;
-  border: 2px solid black;
+  border: 2px solid greenyellow;
 }
 input:invalid {
   background-color: red;
@@ -150,6 +186,44 @@ input:invalid {
 }
 input:hover {
   cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  #initial-page-wrapper h1 {
+    font-size: 0.75rem;
+  }
+  #initial-page-wrapper h2 {
+    font-size: 0.5rem;
+  }
+  #initial-page-wrapper form label {
+    font-size: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+  #initial-page-wrapper form input {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 0.5rem;
+  }
+  #initial-page-wrapper form button {
+    font-size: 0.5rem;
+  }
+  #images-section h2 {
+    font-size: 0.8rem;
+  }
+  #images-section p {
+    font-size: 0.6rem;
+  }
+  #images-section a {
+    font-size: 0.45rem;
+  }
+  #images-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  footer {
+    margin-top: 2.5rem;
+    font-size: 0.6rem;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -2,7 +2,6 @@ import {
   imageModifier, 
   corsEnabler, 
 } from "./serverModel.js"
-import cors from 'cors'
 import express from "express"
 import bodyParser from "body-parser"
 import ejs from 'ejs'
@@ -49,11 +48,13 @@ app.post("/image", async (req, res) => {
     const modifiedImageBase64 = modifiedImage.toString('base64');
     
     inputIndicator = true;
+    // const confetti = new JSConfetti()
     
     res.render("main.html", {
       inputIndicator: inputIndicator,
       originalImage: originalImageBase64,
       modifiedImage: modifiedImageBase64,
+      // confetti: confetti,
     });
   } catch (error) {
     console.error("Error processing image:", error);
@@ -61,13 +62,9 @@ app.post("/image", async (req, res) => {
   }
 });
 
-
 //
 // starting request listening
 
 app.listen(port, () => {
   console.log(`Server is listening on port ${port}`)
 })
-
-
-

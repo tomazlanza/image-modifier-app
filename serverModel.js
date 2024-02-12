@@ -8,9 +8,13 @@ async function imageModifier(image) {
 
   let modifiedImage = null
   
+  const redValue = (Math.random()*1000)
+  const greenValue = (Math.random()*1000)
+  const blueValue = (Math.random()*1000)
+
   await sharp(receivedImage)
     .normalise()
-    .tint({ r: 255, g: 240, b: 16 })
+    .tint({ r: redValue, g: greenValue, b: blueValue })
     .toBuffer()
     .then((image) => {
       modifiedImage = image

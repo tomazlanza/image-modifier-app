@@ -13,36 +13,57 @@ $submit-button-color: #B0C997;
   display: initial;
 }
 
+@keyframes imagesSectionEntry {
+  0%{
+    opacity: 0%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
 #images-section {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  animation: imagesSectionEntry 1s linear;
+
+  h2 {
+    margin-top: 0;
+  }
 
   p {
     margin: 0;
     margin-bottom: 0.75rem;
     font-style: italic;
-    font-size: 0.8;
+    font-size: 0.65;
   }
+  
+}
 
+#images-wrapper {
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  
   div {
     display: flex;
-    
-    div {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      margin: 0 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 1rem;
 
-      h3 {
-        font-size: 1rem;
-        margin-bottom: 0;
-      }
+    h3 {
+      font-size: 1rem;
+      margin-bottom: 0;
     }
   }
 }
+
+
 
 @mixin buttons-common-styling {
   margin-bottom: 0.5rem;
@@ -59,6 +80,17 @@ $submit-button-color: #B0C997;
   }
 }
 
+#link-to-initial-page {
+  @include buttons-common-styling;
+  color: black;
+  padding: 0.5% 1%;
+  background-color: $details-color;
+  border: solid black 0.05rem;
+
+  &:hover{
+    background-color: lighten($details-color, 25%)
+  }     
+}
 
 #reset {
   @include buttons-common-styling;
@@ -155,7 +187,7 @@ input {
   
   &:valid {
     background-color: greenyellow;
-    border: 2px solid black;
+    border: 2px solid greenyellow;
   }
   &:invalid {
     background-color: red;
@@ -164,4 +196,56 @@ input {
   &:hover {
     cursor: pointer;
   }
+}
+
+
+//////// media query for mobile screens
+
+@media (max-width: 500px) {
+
+  #initial-page-wrapper {
+    h1 {
+      font-size: 0.75rem;
+    }
+    h2 {
+      font-size: 0.5rem;
+    }
+    form {
+      label {
+        font-size: 0.5rem;
+        margin-bottom: 0.2rem;
+      }
+    input {
+      margin-top: 0;
+      margin-bottom: 1rem;
+      font-size: 0.5rem;
+    }
+    button {
+      font-size: 0.5rem;
+    }
+    }
+  }
+
+  #images-section {
+    h2 {
+      font-size: 0.8rem;
+    }
+    p {
+      font-size: 0.6rem;
+    }
+    a {
+      font-size: 0.45rem;
+    }
+  }
+
+  #images-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  footer {
+    margin-top: 2.5rem;
+    font-size: 0.6rem;
+  }
+
 }
