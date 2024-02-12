@@ -1,85 +1,11 @@
 <%-include("header.html")%>
 
-<div id="initial-page-wrapper">
+  <% if(!inputIndicator) { %>
+    <%- include("initial-page.html") %>
+  <% } %>
 
-  <h1>Image modifier</h1>
-    
-    <div id="sponsoring-wrapper">
-      <h2 id="sponsor-heading">Sponsoring: Nature - drink water!</h2>
-    </div>
-
-    <br>
-    
-    <form id="form" name="image-input-form" method="post">
-      <label for="image-input">
-        Input the image you want modified
-      </label>
-      <br>
-      <br>
-      <input 
-          type="file" 
-          id="image-input"
-          enctype="multipart/form-data"
-          placeholder="Your image goes here."
-          required
-          accept="image/*"
-      >
-      <script> 
-      
-        // Submitting the request
-        const form = document.getElementById("form")
-        const imageInput = document.getElementById("image-input")
-        const initialPageWrapper = document.getElementById("initial-page-wrapper")
-        
-
-        form.addEventListener('submit', (event) => {
-          event.preventDefault()
-          
-          const imageUpload = imageInput.files[0]
-          const contentType = imageUpload.type
-          const footer = document.getElementsByTagName("footer")
-
-          fetch("https://image-modifier-app.uc.r.appspot.com/image", {
-            method: "POST",
-            headers: {
-              'Content-Type': contentType,
-            }, 
-            body: imageUpload,
-          })
-          .then(res => res.text())
-          .then(html => {
-            document.documentElement.innerHTML = html
-            observeImagesSection()
-            console.log(initialPageWrapper)
-            // form.style.display = "none"
-            // document.body.removeChild(initialPageWrapper)
-            // initialPageWrapper.style.display = "none"
-          })
-        })
-
-
-        // function for showing images-section after file submitting
-        function observeImagesSection() {
-          const imagesSection = document.getElementById("images-section");
-          if (imagesSection) {
-            imagesSection.scrollIntoView({ behavior: 'smooth' });
-            form.style.display = "none"
-          }
-        }
-
-      </script>
-      <br>
-      <br>
-      <button type="reset" id="reset">Reset input</button>
-      <br>
-      <br>
-      <button type="submit" id="submit">Submit</button>  
-    </form>
-    
-  </div>
-
-    <% if(inputIndicator) { %>
-      <%- include("output.html") %>
-    <% } %>
+  <% if(inputIndicator) { %>
+    <%- include("output.html") %>
+  <% } %>
 
   <%-include("footer.html")%>
