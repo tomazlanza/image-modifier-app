@@ -2,6 +2,7 @@ import {
   imageModifier, 
   corsEnabler, 
 } from "./serverModel.js"
+import cors from 'cors'
 import express from "express"
 import bodyParser from "body-parser"
 import ejs from 'ejs'
@@ -25,7 +26,6 @@ app.use(bodyParser.raw({
 }))
 app.use(corsEnabler)
 app.set("views", "./views")
-
 // setting routes
 app.get("/", (req, res) => { 
   inputIndicator = false

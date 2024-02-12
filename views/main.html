@@ -39,7 +39,7 @@
           const contentType = imageUpload.type
           const footer = document.getElementsByTagName("footer")
 
-          fetch("http://localhost:8080/image", {
+          fetch("https://image-modifier-app.uc.r.appspot.com/image", {
             method: "POST",
             headers: {
               'Content-Type': contentType,
@@ -54,13 +54,6 @@
             // form.style.display = "none"
             // document.body.removeChild(initialPageWrapper)
             // initialPageWrapper.style.display = "none"
-          })
-          .catch((error) => {
-            if(res.ok){
-              console.log(error.message)
-            } else {
-              console.log(`There's been an ${error.name} with using the fetch API: ${error.message}`)
-            }
           })
         })
 
