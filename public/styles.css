@@ -105,6 +105,11 @@
   background-color: #d6e3c9;
 }
 
+#input-subtitle {
+  font-size: 0.65rem;
+  font-style: italic;
+}
+
 body {
   background-color: #c99797;
   display: flex;

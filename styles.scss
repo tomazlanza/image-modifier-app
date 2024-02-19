@@ -110,6 +110,11 @@ $submit-button-color: #B0C997;
   }
 }
 
+#input-subtitle {
+  font-size: 0.65rem;
+  font-style: italic;
+}
+
 body {
   background-color: $bg-color;
   display: flex;
