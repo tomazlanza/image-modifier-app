@@ -16,12 +16,16 @@ let inputIndicator = false
 app.engine(".html", ejs.__express)
 app.use(express.static('public'))
 app.use(bodyParser.raw({
+  type: 'image/gif',
+  limit: '5mb'
+}))
+app.use(bodyParser.raw({
   type: 'image/png',
-  limit: '10mb'
+  limit: '5mb'
 }))
 app.use(bodyParser.raw({
   type: 'image/jpeg',
-  limit: '10mb'
+  limit: '5mb'
 }))
 app.use(corsEnabler)
 app.set("views", "./views")
