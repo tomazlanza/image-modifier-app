@@ -22,16 +22,32 @@
           required
           accept="image/*"
       >
-      <script> 
+      <br>
+      <br>
+      <button type="reset" id="reset">Reset input</button>
+      <br>
+      <br>
+      <button type="submit" id="submit">Submit</button>  
+    </form>
+    <script> 
         
-        // Submitting the request
-        const form = document.getElementById("form")
-        const imageInput = document.getElementById("image-input")
-        const initialPageWrapper = document.getElementById("initial-page-wrapper")
+      // Submitting the request
+      const form = document.getElementById("form")
+      const imageInput = document.getElementById("image-input")
+      const initialPageWrapper = document.getElementById("initial-page-wrapper")
+      const submitButton = document.getElementById("submit")
+      const resetButton = document.getElementById("reset")
 
-        form.addEventListener('submit', (event) => {
-          event.preventDefault()
-          
+      form.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        // hiding the submit button for better UX
+        fadeOutElement(submitButton, true)
+        fadeOutElement(resetButton, true)
+        fadeOutElement(imageInput, false)
+
+        // proceeding with the request after transition ends
+        submitButton.addEventListener('transitionend', () => {
           const imageUpload = imageInput.files[0]
           const contentType = imageUpload.type
           const footer = document.getElementsByTagName("footer")
@@ -49,23 +65,25 @@
             document.documentElement.innerHTML = html
             observeImagesSection()
           })
-        })
-
-        // function for showing images-section after file submitting
-        function observeImagesSection() {
-          const imagesSection = document.getElementById("images-section");
-          if (imagesSection) {
-            imagesSection.scrollIntoView({ behavior: 'smooth' });
-          }
+        }, {once: true})
+      }) 
+      
+      // function for showing images-section after file submitting
+      function observeImagesSection() {
+        const imagesSection = document.getElementById("images-section");
+        if (imagesSection) {
+          imagesSection.scrollIntoView({ behavior: 'smooth' });
         }
+      }
 
-      </script>
-      <br>
-      <br>
-      <button type="reset" id="reset">Reset input</button>
-      <br>
-      <br>
-      <button type="submit" id="submit">Submit</button>  
-    </form>
-    
+      function fadeOutElement(element, rotation) {
+        element.style.transition = "all 1s ease-in-out"
+        element.style.opacity = "0"
+
+        if(rotation) {
+          element.style.transform = "rotate(360deg)"  
+        }
+      }
+
+    </script>
   </section>
