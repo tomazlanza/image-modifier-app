@@ -39,10 +39,6 @@ app.get("/", (req, res) => {
 
 app.post("/image", async (req, res) => {
   
-  if(req.body.type == ('image/png' || 'image/jpeg')){
-    console.log('AAAAAAAAHHHHHHHHHH')
-  }
-
   const originalImage = req.body;
 
   try {
