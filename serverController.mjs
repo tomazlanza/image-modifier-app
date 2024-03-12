@@ -1,5 +1,5 @@
 import { 
-  imageModifier, 
+  imageFilter, 
   corsEnabler, 
 } from "./serverModel.js"
 import express from "express"
@@ -8,6 +8,8 @@ import ejs from 'ejs'
 
 const app = express()
 const port = 8080
+
+let originalImage
 
 let inputIndicator = false
 
@@ -27,6 +29,7 @@ app.use(bodyParser.raw({
   type: 'image/jpeg',
   limit: '5mb'
 }))
+app.use(express.json())
 app.use(corsEnabler)
 app.set("views", "./views")
 // setting routes
@@ -37,34 +40,47 @@ app.get("/", (req, res) => {
   })
 })
 
-app.post("/image", async (req, res) => {
-  
-  if(req.body.type == ('image/png' || 'image/jpeg')){
-    console.log('AAAAAAAAHHHHHHHHHH')
+// app.post("/image", async (req, res) => {
+app.post("/image", (req, res) => {
+
+  // if(req.body) {
+  //   //do a validation
+  // }
+  originalImage = req.body
+  res.end("Image has been succesfully received!")
+})
+
+app.post("/rgb-values-input", (req, res) => {
+
+  // if(req.body){
+  //   do a validation 
+  // }
+
+  const rgbvalues = req.body
+
+  async function sendingResultToClient() {
+    try {
+      const filteredImage = await imageFilter(originalImage, rgbvalues)
+    
+      const originalImageBase64 = originalImage.toString('base64')
+      const filteredImageBase64 = filteredImage.toString('base64')
+      
+      inputIndicator = true
+      
+      res.render("main.html", {
+        inputIndicator: inputIndicator,
+        originalImage: originalImageBase64,
+        filteredImage: filteredImageBase64,
+      })
+    } catch (error) {
+      console.error("Error processing image:", error)
+      res.status(500).send("Error processing image. Please, try again.")
+    }
   }
 
-  const originalImage = req.body;
+  sendingResultToClient()
 
-  try {
-    const modifiedImage = await imageModifier(originalImage);
-  
-    const originalImageBase64 = originalImage.toString('base64');
-    const modifiedImageBase64 = modifiedImage.toString('base64');
-    
-    inputIndicator = true;
-    // const confetti = new JSConfetti()
-    
-    res.render("main.html", {
-      inputIndicator: inputIndicator,
-      originalImage: originalImageBase64,
-      modifiedImage: modifiedImageBase64,
-      // confetti: confetti,
-    });
-  } catch (error) {
-    console.error("Error processing image:", error);
-    res.status(500).send("Error processing image");
-  }
-});
+})
 
 //
 // starting request listening

@@ -1,28 +1,70 @@
 <section id="initial-page-wrapper">
 
-  <h1>Random image styling</h1>
-    
-    <div id="sponsoring-wrapper">
-      <h2 id="sponsor-heading">Sponsoring: Nature - drink water!</h2>
-    </div>
+  <h1>Image 
+    <span id="red-span">R</span>
+    <span id="green-span">G</span>
+    <span id="blue-span">B</span> 
+    Filter
+  </h1>
 
     <br>
     
     <form id="form" name="image-input-form" method="post">
-      <label for="image-input">
-        Input the image you want stylized
-      </label>
-      <p id="input-subtitle">(JPEG, PNG, and GIF formats are accepted)</p>
+      <section id="image-input-section">
+        <label for="image-input">
+          Input an image
+        </label>
+        <p class="input-subtitle">(JPEG, PNG, and GIF formats are accepted)</p>
+        <br>
+        <br>
+        <input 
+            type="file" 
+            id="image-input"
+            enctype="multipart/form-data"
+            placeholder="Your image goes here."
+            required
+            accept="image/jpg, image/png, image/gif"
+        >
+      </section>
       <br>
       <br>
-      <input 
-          type="file" 
-          id="image-input"
-          enctype="multipart/form-data"
-          placeholder="Your image goes here."
-          required
-          accept="image/*"
-      >
+      <section id="rgb-input-section">
+        <label for="color-input">Set RGB values from 0 to 255</label>
+        <p class="input-subtitle">(random ones will be chosen for each omitted one)</p>
+        
+        <div id="rgb-input-wrapper">
+          <input
+            class="color-input"
+            id="red-value"
+            type="number"
+            placeholder="R"
+            min="0"
+            max="255"
+            step="1"
+            oninput="validateRGBInput(this)"
+          >
+          <input
+            class="color-input"
+            id="green-value"
+            type="number"
+            placeholder="G"
+            min="0"
+            max="255"
+            step="1"
+            oninput="validateRGBInput(this)"
+          >
+          <input
+            class="color-input"
+            id="blue-value"
+            type="number"
+            placeholder="B"
+            min="0"
+            max="255"
+            step="1"
+            oninput="validateRGBInput(this)"
+          >
+        </div>
+      </section>
       <br>
       <br>
       <button type="reset" id="reset">Reset input</button>
@@ -32,23 +74,34 @@
     </form>
     <script> 
         
-      // Submitting the request
+      //getting HTML elements
       const form = document.getElementById("form")
       const imageInput = document.getElementById("image-input")
+      const redInput = document.getElementById("red-value")
+      const blueInput = document.getElementById("blue-value")
+      const greenInput = document.getElementById("green-value")
       const initialPageWrapper = document.getElementById("initial-page-wrapper")
       const submitButton = document.getElementById("submit")
       const resetButton = document.getElementById("reset")
+      const rgbInputSection = document.getElementById("rgb-input-section")
 
+      //writing submission logic
       form.addEventListener('submit', (event) => {
         event.preventDefault()
 
-        // hiding the submit button for better UX
+        // hiding the submission button for better UX
         fadeOutElement(submitButton, true)
         fadeOutElement(resetButton, true)
+        
         fadeOutElement(imageInput, false)
+        fadeOutElement(redInput, false)
+        fadeOutElement(blueInput, false)
+        fadeOutElement(greenInput, false)
 
         // proceeding with the request after transition ends
         submitButton.addEventListener('transitionend', () => {
+          
+          //submitting image
           const imageUpload = imageInput.files[0]
           const contentType = imageUpload.type
           const footer = document.getElementsByTagName("footer")
@@ -61,28 +114,51 @@
             }, 
             body: imageUpload,
           })
+          .then(res => console.log(res))
+          .catch(err => console.error(err))
+
+          //submitting RGB values
+          const rgbValues = {
+            red: redInput.value,
+            green: greenInput.value,
+            blue: blueInput.value
+          }
+
+          fetch("https://image-modifier-app.uc.r.appspot.com/rgb-values-input", {
+          // fetch("http://localhost:8080/rgb-values-input", {
+          method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(rgbValues)
+          })
           .then(res => res.text())
           .then(html => {
             document.documentElement.innerHTML = html
-            observeImagesSection()
+            // observeImagesSection()
           })
+          .catch(error => console.error(error))
+        
         }, {once: true})
       }) 
       
-      // function for showing images-section after file submitting
-      function observeImagesSection() {
-        const imagesSection = document.getElementById("images-section");
-        if (imagesSection) {
-          imagesSection.scrollIntoView({ behavior: 'smooth' });
-        }
-      }
-
+      //function for fading out an element, with optional rotation as well
       function fadeOutElement(element, rotation) {
         element.style.transition = "all 1s ease-in-out"
         element.style.opacity = "0"
 
         if(rotation) {
           element.style.transform = "rotate(360deg)"  
+        }
+      }
+
+      function validateRGBInput(input) {
+        input.value
+        if (isNaN(input.value) || input.value < 0 || input.value > 255) {
+          // Display an error message or take appropriate action
+          input.setCustomValidity('Value must be between 0 and 255');
+        } else {
+          input.setCustomValidity('');
         }
       }
 

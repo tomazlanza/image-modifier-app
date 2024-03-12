@@ -1,24 +1,26 @@
   <section id="images-section">
     
-    <h2>There you go!</h2>
+    <h2>Here is your new image!</h2>
     <p>Click on an image to open it in a new tab</p>
     <a id="link-to-initial-page" href="https://image-modifier-app.uc.r.appspot.com/">Return to initial page</a>
     
     <div id="images-wrapper">    
+            
       <div>
+        <h3>Filtered</h3>
+        <a href="data:image/jpeg;base64,<%= filteredImage %>" target="_blank">
+          <img alt="scrambled-image" src="data:image/jpeg;base64,<%= filteredImage %>">
+        </a>
+      </div>
+      <div  id="original-img-div">
         <h3>Original</h3>
         <a href="data:image/jpeg;base64,<%= originalImage %>" target="_blank">
           <img alt="original-image" src="data:image/jpeg;base64,<%= originalImage %>">
         </a>
       </div>
-      
-      <div>
-        <h3>Stylized</h3>
-        <a href="data:image/jpeg;base64,<%= modifiedImage %>" target="_blank">
-          <img alt="scrambled-image" src="data:image/jpeg;base64,<%= modifiedImage %>">
-        </a>
-      </div>
     </div>
+    
+    
 
   </section>
   <!-- <output></output> -->
