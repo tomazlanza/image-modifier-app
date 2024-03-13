@@ -84,6 +84,7 @@
       const submitButton = document.getElementById("submit")
       const resetButton = document.getElementById("reset")
       const rgbInputSection = document.getElementById("rgb-input-section")
+      const footer = document.getElementsByTagName("footer")
 
       //writing submission logic
       form.addEventListener('submit', (event) => {
@@ -102,45 +103,50 @@
         submitButton.addEventListener('transitionend', () => {
           
           //submitting image
-          const imageUpload = imageInput.files[0]
-          const contentType = imageUpload.type
-          const footer = document.getElementsByTagName("footer")
+          let imageUpload = imageInput.files[0]
+          const reader = new FileReader();
 
-          // fetch("http://localhost:8080/image", {
-          fetch("https://image-modifier-app.uc.r.appspot.com/image", {
-            method: "POST",
-            headers: {
-              'Content-Type': contentType,
-            }, 
-            body: imageUpload,
-          })
-          .then(res => console.log(res))
-          .catch(err => console.error(err))
+          reader.addEventListener(
+            "load", 
+            (event) => {
+              imageUpload = event.target.result
 
-          //submitting RGB values
-          const rgbValues = {
-            red: redInput.value,
-            green: greenInput.value,
-            blue: blueInput.value
-          }
+              const rgbValues = {
+                red: redInput.value,
+                green: greenInput.value,
+                blue: blueInput.value
+              }
 
-          fetch("https://image-modifier-app.uc.r.appspot.com/rgb-values-input", {
-          // fetch("http://localhost:8080/rgb-values-input", {
-          method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(rgbValues)
-          })
-          .then(res => res.text())
-          .then(html => {
-            document.documentElement.innerHTML = html
-            // observeImagesSection()
-          })
-          .catch(error => console.error(error))
-        
+              const requestData = {
+                imageUpload: imageUpload, 
+                rgbValues: rgbValues 
+              }
+              
+              console.log(requestData)
+
+              fetch("https://image-modifier-app.uc.r.appspot.com/image", {
+              // fetch("http://localhost:8080/image", {
+                method: "POST",
+                  headers: {
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(requestData)
+                })
+                .then(res => res.text())
+                .then(html => {
+                  document.documentElement.innerHTML = html
+                  // observeImagesSection()
+                })
+                .catch(error => console.error(error))
+
+            }
+          )
+
+          reader.readAsDataURL(imageUpload)
+
         }, {once: true})
-      }) 
+      }
+      ) 
       
       //function for fading out an element, with optional rotation as well
       function fadeOutElement(element, rotation) {
