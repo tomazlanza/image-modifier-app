@@ -1,6 +1,6 @@
 # Image modifier app
 
-This project was carried out as a study on Server-Side Rendering and REST APIs.
+This project was carried out as a study on REST APIs and Server-Side Rendering.
 
 The application was designed with Express.js, and uses the Embedded JavaScript (ejs) module as its ‘view engine‘ middleware, easily allowing for conditional HTML rendering.
 
